@@ -46,10 +46,15 @@ local function GetClosestPlayer()
                                 local ScreenPoint = Camera:WorldToScreenPoint(v.Character.HumanoidRootPart.Position)
                                 local VectorDistance = (Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y) - Vector2.new(ScreenPoint.X, ScreenPoint.Y)).Magnitude
 
-                                if VectorDistance < MaximumDistance then
-                                    Target = v
-                                    MaximumDistance = VectorDistance
-                                end 
+                                -- calculate the angle between the camera and the player's character
+                                local LookVector = (v.Character.HumanoidRootPart.Position - Camera.CFrame.Position).Unit
+                                local Dot = Camera.CFrame.LookVector:Dot(LookVector)
+                                if Dot > 0 then
+                                    if VectorDistance < MaximumDistance then
+                                        Target = v
+                                        MaximumDistance = VectorDistance
+                                    end
+                                end
                             end
                         end
                     end
@@ -61,9 +66,14 @@ local function GetClosestPlayer()
                                 local ScreenPoint = Camera:WorldToScreenPoint(v.Character.HumanoidRootPart.Position)
                                 local VectorDistance = (Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y) - Vector2.new(ScreenPoint.X, ScreenPoint.Y)).Magnitude
 
-                                if VectorDistance < MaximumDistance then
-                                    Target = v
-                                    MaximumDistance = VectorDistance
+                                -- calculate the angle between the camera and the player's character
+                                local LookVector = (v.Character.HumanoidRootPart.Position - Camera.CFrame.Position).Unit
+                                local Dot = Camera.CFrame.LookVector:Dot(LookVector)
+                                if Dot > 0 then
+                                    if VectorDistance < MaximumDistance then
+                                        Target = v
+                                        MaximumDistance = VectorDistance
+                                    end
                                 end
                             end
                         end
